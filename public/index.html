@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fetching Data with JavaScript</title>
+  <style> body { font-family: sans-serif; text-align: center; } </style>
+</head>
+<body>
+<h1>Testing JavaScript fetch()</h1>
+<p>This file contains JavaScript for interacting with DragonAPI on Firebird. Results will appear below.</p>
+
+<div id="profile"></div>
+<div id="download"></div>
+<div id="errors"></div>
+
+
+<script>
+
+// Read more about JavaScript Fetch here:
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+ 
+
+const fetchPokemon = async () => {
+  let response = await fetch("dragons")
+///  console.log(response)
+  if (response.ok){ return response.json() }
+  else{
+    var p = document.createElement("p");
+    p.innerHTML = response.url + '<br/>' +
+      "Error: " + response.status;
+    document.querySelector('#errors').appendChild(p);
+  }
+}
+
+const display = (jsonArray) => {
+    console.log(jsonArray)
+    for (json of jsonArray){
+
+
+   var d = document.createElement("div");
+    d.innerHTML =
+      '<h3>' + json.name + '</h3>' +
+      '<img src="'+ json.sprites.front_default+'" />' +
+      '<p>Height: ' + json.height + '</p>' +
+      '<p>Weight: ' + json.weight + '</p>';
+    document.querySelector('#profile').appendChild(d);
+  }
+}
+
+const download = (json) => {
+    var a = document.createElement("a");
+    a.innerHTML = "Download JSON for " + json.name;
+    var file = new Blob([JSON.stringify(json)], {type: 'application/json'});
+    a.href = URL.createObjectURL(file);
+    a.download = json.name + '_data.json';
+    document.querySelector('#download').appendChild(a);
+}
+
+fetchPokemon().then(data => {
+    if (data){
+      display( data )
+    //  download( data )
+    }
+})
+
+</script>
+
+</body>
+</html>
