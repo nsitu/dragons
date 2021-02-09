@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/nsitu/dragons/issues"
   },
-  "homepage": "https://github.com/nsitu/dragons#readme"
+  "homepage": "https://github.com/nsitu/dragons#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4"
+  }
 }
