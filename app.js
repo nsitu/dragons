@@ -19,6 +19,14 @@ app.use('/DragonAPI', express.static('public'))
 // Listen for HTTP GET requests.
 app.get('/DragonAPI/dragons/', (req, res) => {
 
+    // log information about the request
+    console.log('Dragons requested'
+        + ' on ' + new Date()
+        + ' by ' + req.headers['x-forwarded-for']
+        + ' with ' + req.headers['user-agent']
+        + ' at ' + req.headers['referer']
+      )
+  
   const client = new MongoClient(
         process.env.DB, {
           useUnifiedTopology: true,
