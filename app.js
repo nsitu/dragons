@@ -3,13 +3,13 @@ const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 
 // setup debug.log
-const fs = require('fs')
-const util = require('util')
-let logFile = fs.createWriteStream( './debug.log' )
-console.log = (message) => {
-  message = util.format(message) + '\n'
-  logFile.write(message)   
-}
+//const fs = require('fs')
+//const util = require('util')
+//let logFile = fs.createWriteStream( './debug.log' )
+//console.log = (message) => {
+//  message = util.format(message) + '\n'
+//  logFile.write(message)   
+//}
 
 const app	= express();  			// activate an express app
 app.use( express.json() ); 		// enable parsing of JSON data in our app
@@ -49,6 +49,6 @@ app.get('/DragonAPI/dragons/', (req, res) => {
   });
 });
 
-  app.listen(3000, "localhost", () => {
+  app.listen(6000, "localhost", () => {
    console.log("We are live." );
  });
